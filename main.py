@@ -6,8 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 import time
 
-from data import phone_number, card_number
-
 
 # no modificar
 def retrieve_phone_code(driver) -> str:
@@ -38,17 +36,22 @@ def retrieve_phone_code(driver) -> str:
 
 
 class UrbanRoutesPage:
+    #Localizadores
+
+    #localizadores para ingresar ruta
     from_field = (By.ID, 'from')
     to_field = (By.ID, 'to')
     call_taxi_button = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[1]/div[3]/div[1]/button')
     comfort_tariff_button = (By.XPATH, './/div[@class = "tcard"]//div[contains(text(),"Comfort")]')
 
+    # localizadores para ingresar número de teléfono
     phone_number_button = (By.CLASS_NAME, 'np-button')
     phone_number_field = (By.CSS_SELECTOR, '#phone')
     save_phone_number = (By.XPATH, './/div[@class = "buttons"]//button[contains(text(),"Siguiente")]')
     code_field = (By.XPATH, './/div[@class= "input-container"]//input[@id = "code"]')
     verify_code_button = (By.XPATH, '//*[text()="Confirmar"]')
 
+    # localizadores para agregar tarjeta en Método de pago
     payment_method = (By.CLASS_NAME, 'pp-button')
     add_credit_card = (By.XPATH, '//*[text()="Agregar tarjeta"]')
     card_number_field = (By.ID, 'number')
@@ -57,6 +60,7 @@ class UrbanRoutesPage:
     change_focus = (By.CLASS_NAME, 'card-second-row')
     close_modal_button = (By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[1]/button')
 
+    # localizadores para agregar un mensaje y los requisitos del pedido
     message = (By.ID, 'comment')
     blanket_and_tissues_switch = (By.CLASS_NAME, 'r-sw')
     blanket_and_tissues_value = (By.XPATH, '//input[@class="switch-input"]')
@@ -86,6 +90,7 @@ class UrbanRoutesPage:
     def get_to(self):
         return self.driver.find_element(*self.to_field).get_property('value')
 
+    # Elegir tarifa Comfort
     def set_comfort_tariff(self):
         self.driver.find_element(*self.comfort_tariff_button).click()
         time.sleep(3)
@@ -127,11 +132,13 @@ class UrbanRoutesPage:
         self.driver.find_element(*self.verify_code_button).click()
         time.sleep(3)
 
+    # Elegir método de pago
     def click_payment_method_button(self):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.payment_method))
         self.driver.find_element(*self.payment_method).click()
         time.sleep(3)
 
+    # Agregar Tarjeta como otro método de pago
     def add_credit_card_button(self):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.add_credit_card))
         self.driver.find_element(*self.add_credit_card).click()
@@ -153,10 +160,12 @@ class UrbanRoutesPage:
     def get_card_code(self):
         return self.driver.find_element(*self.card_code_field).get_property('value')
 
-    def click_on_screen(self):   #hacer clic en tab u otra parte del modal para que se habilite Agregar
+    # Hacer clic en otra parte del modal para que se habilite "Agregar"
+    def click_on_screen(self):
         self.driver.find_element(*self.change_focus).click()
         time.sleep(2)
 
+    # Guardar los datos de la tarjeta
     def click_save_card_button(self):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.save_credit_card))
         self.driver.find_element(*self.save_credit_card).click()
@@ -175,13 +184,16 @@ class UrbanRoutesPage:
     def get_driver_message(self):
         return self.driver.find_element(*self.message).get_property('value')
 
+    # Activar el switch de "Mantas y pañuelos"
     def turn_on_blanket_and_tissues(self):
         self.driver.find_element(*self.blanket_and_tissues_switch).click()
         time.sleep(3)
 
+    # Revisar que el switch de Mantas y pañuelos esté seleccionado
     def check_blanket_switch_is_on(self):
         return self.driver.find_element(*self.blanket_and_tissues_value).is_selected()
 
+    # Incrementar el contador de helado en 2
     def add_ice_cream_counter(self):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.ice_cream_counter))
         time.sleep(2)
@@ -190,19 +202,23 @@ class UrbanRoutesPage:
         self.driver.find_element(*self.ice_cream_counter).click()
         time.sleep(3)
 
+    #Obtener el valor del contador de "Helado"
     def get_ice_cream_count(self):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.ice_cream_number))
         return int(self.driver.find_element(*self.ice_cream_number).text)
 
+    #Reservar el taxi
     def click_book_trip_button(self):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.book_trip_button))
         self.driver.find_element(*self.book_trip_button).click()
         time.sleep(35)
 
+    #Paso para establecer la ruta
     def set_route(self, from_field, to_field):
         self.set_from(from_field)
         self.set_to(to_field)
 
+    #Paso para el proceso de Agregar número de teléfono
     def add_phone_number(self, phone_number):
         self.click_phone_number_button()
         self.set_phone_number(phone_number)
@@ -211,6 +227,7 @@ class UrbanRoutesPage:
         self.set_verification_code(code)
         self.click_verify_code_button()
 
+    #Paso para el proceso de agregar Método de pago
     def add_payment_method(self, card_number, card_code):
         self.click_payment_method_button()
         self.add_credit_card_button()
@@ -219,6 +236,7 @@ class UrbanRoutesPage:
         self.click_on_screen()
         self.click_save_card_button()
         self.click_close_payment_method_modal()
+
 
 
 class TestUrbanRoutes:
@@ -235,7 +253,7 @@ class TestUrbanRoutes:
         options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
 
         # Iniciar el servicio de Chrome
-        service = Service()  # Puedes pasar el path del driver aquí si es necesario
+        service = Service()
 
         # Inicializar el driver con opciones
         cls.driver = webdriver.Chrome(service=service, options=options)

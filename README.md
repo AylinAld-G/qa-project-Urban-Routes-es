@@ -9,7 +9,7 @@
 localizadores para acceder a los elementos y métodos específicos para interactuar con la aplicación.
 - Se utilizó el Modelo de Objetos de Página para facilitar la organización al momento de las pruebas donde se manejaron los métodos _setup_class()_ y _teardown_class()_.
 
-El proyecto consta del archivo _data.py_ que contiene los datos para hacer las pruebas y del archivo _main.py_ donde se encuentran los métodos para simular las acciones en la aplicación y las pruebas necesarias para evaluar la funcionalidad en particular. 
+- El proyecto consta del archivo _data.py_ que contiene los datos para hacer las pruebas y del archivo _main.py_ donde se encuentran los métodos para simular las acciones en la aplicación y las pruebas necesarias para evaluar la funcionalidad en particular. 
 
 
 ### Pruebas

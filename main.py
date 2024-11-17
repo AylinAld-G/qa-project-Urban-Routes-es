@@ -6,8 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 import time
 
-from data import phone_number, card_number
-
 
 # no modificar
 def retrieve_phone_code(driver) -> str:
@@ -240,6 +238,7 @@ class UrbanRoutesPage:
         self.click_close_payment_method_modal()
 
 
+
 class TestUrbanRoutes:
 
     driver = None
@@ -254,7 +253,7 @@ class TestUrbanRoutes:
         options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
 
         # Iniciar el servicio de Chrome
-        service = Service()  # Puedes pasar el path del driver aquí si es necesario
+        service = Service()
 
         # Inicializar el driver con opciones
         cls.driver = webdriver.Chrome(service=service, options=options)

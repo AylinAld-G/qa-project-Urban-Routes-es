@@ -27,9 +27,9 @@ Para iniciar, es necesario cambiar la ruta _urban_routes_url_ con la dirección 
    from phone_code import retrieve_phone_code
    ```
 3. En el archivo _TestUrbanRoutes.py_, importar la clase webdriver:
-  ```sh
-  from selenium import webdriver y los archivos _data_ y _main_
-  import data
-  from main import UrbanRoutesPage
-  ```
+   ```sh
+   from selenium import webdriver y los archivos _data_ y _main_
+   import data
+   from main import UrbanRoutesPage
+   ```
    - Cambiar la configuración de ejecución a Pytest. Una vez configurado, ejecutar el script con el comando _pytest TestUrbanRoutes.py_ en la terminal y esperar a que las pruebas terminen.

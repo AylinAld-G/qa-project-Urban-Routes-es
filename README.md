@@ -6,13 +6,14 @@
 
 ### **Tecnologías y técnicas utilizadas**: 
 - El lenguaje utilizado es _Python_ y la estructura del código se basa en el uso de clases, objetos y métodos haciendo uso del controlador de navegador _Selenium_ donde se emplean
-localizadores para acceder a los elementos y métodos específicos para interactuar con la aplicación.
+localizadores para acceder a los elementos y métodos específicos para interactuar con la aplicación, en los cuales se usan las clases _By_, _WebDriverWait_ y _expected_conditions_.
 - Se utilizó el Modelo de Objetos de Página para facilitar la organización al momento de las pruebas donde se manejaron los métodos _setup_class()_ y _teardown_class()_.
 
-- El proyecto consta del archivo _data.py_ que contiene los datos para hacer las pruebas y del archivo _main.py_ donde se encuentran los métodos para simular las acciones en la aplicación y las pruebas necesarias para evaluar la funcionalidad en particular. 
+- El proyecto consta del archivo _data.py_ que contiene los datos para hacer las pruebas, el archivo _main.py_ donde se encuentran los localizadores y los métodos para simular las acciones en la aplicación, _phone_code.py_ que contiene la función para recuperar el código de verificación del número de teléfono y _TestUrbanRoutes.py_ en el que se realizan las pruebas necesarias para evaluar la funcionalidad en particular. 
 
 
 ### Pruebas
 1. En el archivo _data.py_ se encuentran los datos para probar la aplicación. 
 Para iniciar, es necesario cambiar la ruta _urban_routes_url_ con la dirección actualizada del servidor.
-2. En el archivo _main.py_, cambiar la configuración de ejecución a Pytest. Una vez configurado, ejecutar el script y esperar a que las pruebas terminen.
+2. Dentro del archivo _main.py_ asegurarse de importar las librerías _common_, _support_ y _webdriver_.
+3. En el archivo _TestUrbanRoutes.py_, cambiar la configuración de ejecución a Pytest. Una vez configurado, ejecutar el script con el comando _pytest TestUrbanRoutes.py_ en la terminal y esperar a que las pruebas terminen.

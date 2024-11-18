@@ -1,48 +1,19 @@
-import data
-from selenium import webdriver
-from selenium.webdriver import Keys
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.by import By
+from phone_code import retrieve_phone_code
 import time
 
 
-# no modificar
-def retrieve_phone_code(driver) -> str:
-    """Este código devuelve un número de confirmación de teléfono y lo devuelve como un string.
-    Utilízalo cuando la aplicación espere el código de confirmación para pasarlo a tus pruebas.
-    El código de confirmación del teléfono solo se puede obtener después de haberlo solicitado en la aplicación."""
-
-    import json
-    import time
-    from selenium.common import WebDriverException
-    code = None
-    for i in range(10):
-        try:
-            logs = [log["message"] for log in driver.get_log('performance') if log.get("message")
-                    and 'api/v1/number?number' in log.get("message")]
-            for log in reversed(logs):
-                message_data = json.loads(log)["message"]
-                body = driver.execute_cdp_cmd('Network.getResponseBody',
-                                              {'requestId': message_data["params"]["requestId"]})
-                code = ''.join([x for x in body['body'] if x.isdigit()])
-        except WebDriverException:
-            time.sleep(1)
-            continue
-        if not code:
-            raise Exception("No se encontró el código de confirmación del teléfono.\n"
-                            "Utiliza 'retrieve_phone_code' solo después de haber solicitado el código en tu aplicación.")
-        return code
-
-
 class UrbanRoutesPage:
-    #Localizadores
+    # Localizadores
 
-    #localizadores para ingresar ruta
+    # localizadores para ingresar ruta
     from_field = (By.ID, 'from')
     to_field = (By.ID, 'to')
     call_taxi_button = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[1]/div[3]/div[1]/button')
     comfort_tariff_button = (By.XPATH, './/div[@class = "tcard"]//div[contains(text(),"Comfort")]')
+    active_tariff = (By.CSS_SELECTOR, '.tcard.active')
 
     # localizadores para ingresar número de teléfono
     phone_number_button = (By.CLASS_NAME, 'np-button')
@@ -67,10 +38,11 @@ class UrbanRoutesPage:
     ice_cream_counter = (By.CLASS_NAME, 'counter-plus')
     ice_cream_number = (By.CLASS_NAME, 'counter-value')
     book_trip_button = (By.CLASS_NAME, 'smart-button')
-
+    taxi_modal = (By.CLASS_NAME, 'order-body')
 
     def __init__(self, driver):
         self.driver = driver
+
 
     def set_from(self, from_address):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.from_field))
@@ -94,6 +66,9 @@ class UrbanRoutesPage:
     def set_comfort_tariff(self):
         self.driver.find_element(*self.comfort_tariff_button).click()
         time.sleep(3)
+
+    def get_tariff_value(self):
+        return self.driver.find_element(*self.active_tariff).text
 
     def click_taxi_button(self):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.call_taxi_button))
@@ -213,6 +188,10 @@ class UrbanRoutesPage:
         self.driver.find_element(*self.book_trip_button).click()
         time.sleep(35)
 
+    def check_presence_of_taxi_modal(self):
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.taxi_modal))
+        return True
+
     #Paso para establecer la ruta
     def set_route(self, from_field, to_field):
         self.set_from(from_field)
@@ -236,77 +215,3 @@ class UrbanRoutesPage:
         self.click_on_screen()
         self.click_save_card_button()
         self.click_close_payment_method_modal()
-
-
-
-class TestUrbanRoutes:
-
-    driver = None
-
-    @classmethod
-    def setup_class(cls):
-        from selenium.webdriver.chrome.service import Service
-        from selenium.webdriver.chrome.options import Options
-        # Configurar las opciones del navegador
-        options = Options()
-        options.add_experimental_option("excludeSwitches", ["enable-logging"])
-        options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
-
-        # Iniciar el servicio de Chrome
-        service = Service()
-
-        # Inicializar el driver con opciones
-        cls.driver = webdriver.Chrome(service=service, options=options)
-
-
-    def test_set_route(self):
-        self.driver.get(data.urban_routes_url)
-        routes_page = UrbanRoutesPage(self.driver)
-        address_from = data.address_from
-        address_to = data.address_to
-        routes_page.set_route(address_from, address_to)
-        assert routes_page.get_from() == address_from
-        assert routes_page.get_to() == address_to
-
-    def test_set_phone_number(self):
-        routes_page = UrbanRoutesPage(self.driver)
-        routes_page.click_taxi_button()
-        routes_page.set_comfort_tariff()
-        phone_number = data.phone_number
-        routes_page.add_phone_number(phone_number)
-        assert routes_page.get_phone_number() == phone_number
-
-
-    def test_set_payment_method(self):
-        routes_page = UrbanRoutesPage(self.driver)
-        card_number = data.card_number
-        card_code = data.card_code
-        routes_page.add_payment_method(card_number, card_code)
-        assert routes_page.get_card_number() == card_number
-        assert routes_page.get_card_code() == card_code
-
-    def test_set_driver_message(self):
-        routes_page = UrbanRoutesPage(self.driver)
-        message = data.message_for_driver
-        routes_page.set_driver_message(message)
-        assert routes_page.get_driver_message() == message
-
-    def test_check_blanket_switch_is_on(self):
-        routes_page = UrbanRoutesPage(self.driver)
-        routes_page.turn_on_blanket_and_tissues()
-        assert routes_page.check_blanket_switch_is_on()
-
-    def test_get_ice_cream_count(self):
-        routes_page = UrbanRoutesPage(self.driver)
-        routes_page.add_ice_cream_counter()
-        assert routes_page.get_ice_cream_count() == 2
-
-    def test_book_trip_button(self):
-        routes_page = UrbanRoutesPage(self.driver)
-        routes_page.click_book_trip_button()
-
-
-
-    @classmethod
-    def teardown_class(cls):
-        cls.driver.quit()

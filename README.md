@@ -70,6 +70,7 @@ Dentro de él se realizan las pruebas necesarias para evaluar la funcionalidad e
 ##### Clase teardown
 ![teardown](https://github.com/user-attachments/assets/2330a6e0-a490-49bc-bbd6-c436df7cd165)
 
+### Comandos e importaciones
 
 
 #### Instalación de Selenium

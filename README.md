@@ -39,7 +39,7 @@ En él se encuentran los localizadores y los métodos para simular las acciones 
 
 ![met8](https://github.com/user-attachments/assets/22426f0e-482f-4fa5-bc0a-a0efaa9b0094)
 
-** Pasos **
+**Pasos**
 ![met9](https://github.com/user-attachments/assets/4611239c-4042-4067-aeb9-c07061099b89)
 
 

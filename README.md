@@ -9,7 +9,17 @@
 localizadores para acceder a los elementos y métodos específicos para interactuar con la aplicación, en los cuales se usan las clases _By_, _WebDriverWait_ y _expected_conditions_.
 - Se utilizó el Modelo de Objetos de Página para facilitar la organización al momento de las pruebas donde se manejaron los métodos _setup_class()_ y _teardown_class()_.
 
-- El proyecto consta del archivo _data.py_ que contiene los datos para hacer las pruebas, el archivo _main.py_ donde se encuentran los localizadores y los métodos para simular las acciones en la aplicación, _phone_code.py_ que contiene la función para recuperar el código de verificación del número de teléfono y _TestUrbanRoutes.py_ en el que se realizan las pruebas necesarias para evaluar la funcionalidad en particular.
+#### Archivo _data.py_
+Contiene los datos para hacer las pruebas.
+
+#### Archivo _main.py_
+En él se encuentran los localizadores y los métodos para simular las acciones en la aplicación.
+
+#### Archivo _phone_code.py_
+Contiene la función para recuperar el código de verificación del número de teléfono.
+
+#### Archivo _TestUrbanRoutes.py_ 
+Dentro de él se realizan las pruebas necesarias para evaluar la funcionalidad en particular.
 
 #### Instalación de Selenium
 ```sh

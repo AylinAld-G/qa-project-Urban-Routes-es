@@ -12,6 +12,9 @@ localizadores para acceder a los elementos y métodos específicos para interact
 #### Archivo _data.py_
 Contiene los datos para hacer las pruebas.
 
+![dat](https://github.com/user-attachments/assets/d4098f11-0652-4c42-ad47-d95cbf1da49a)
+
+
 #### Archivo _main.py_
 En él se encuentran los localizadores y los métodos para simular las acciones en la aplicación.
 

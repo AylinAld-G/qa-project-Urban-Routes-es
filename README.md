@@ -95,3 +95,5 @@ Para iniciar, es necesario cambiar la ruta _urban_routes_url_ con la dirección 
    from main import UrbanRoutesPage
    ```
    - Cambiar la configuración de ejecución a Pytest. Una vez configurado, ejecutar el script con el comando _pytest TestUrbanRoutes.py_ en la terminal y esperar a que las pruebas terminen.
+     ![runtest](https://github.com/user-attachments/assets/a1c181b5-bd49-4821-aa5e-9a78e6cc92de)
+

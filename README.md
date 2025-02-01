@@ -17,6 +17,36 @@ Contiene los datos para hacer las pruebas.
 
 #### Archivo _main.py_
 En él se encuentran los localizadores y los métodos para simular las acciones en la aplicación.
+##### Localizadores
+![loc1](https://github.com/user-attachments/assets/7e9a0db3-106b-4e32-a434-973af94de0ff)
+
+![loc2](https://github.com/user-attachments/assets/ba326e25-ec56-4bb5-9eab-9976b51d7d61)
+
+##### Métodos
+![met1](https://github.com/user-attachments/assets/e82a3fa8-d451-4a67-a612-d8b6bc9ac4f4)
+
+![met2](https://github.com/user-attachments/assets/8becb4ff-2456-4302-ae62-8e0979c786a2)
+
+![met3](https://github.com/user-attachments/assets/e46706a4-afa0-42e4-bcc9-a881bce6babe)
+
+![met4](https://github.com/user-attachments/assets/158635f2-a291-438d-9251-ee88955c885e)
+
+![met5](https://github.com/user-attachments/assets/641ce3fd-090c-4468-9d72-78013d20002f)
+
+![met6](https://github.com/user-attachments/assets/faed7a7b-b548-4dca-b58c-ab72e1cac1fb)
+
+![met7](https://github.com/user-attachments/assets/f75dac18-1f0d-49fa-873b-8ba63f657d53)
+
+![met8](https://github.com/user-attachments/assets/22426f0e-482f-4fa5-bc0a-a0efaa9b0094)
+
+** Pasos **
+![met9](https://github.com/user-attachments/assets/4611239c-4042-4067-aeb9-c07061099b89)
+
+
+
+
+
+
 
 #### Archivo _phone_code.py_
 Contiene la función para recuperar el código de verificación del número de teléfono.

@@ -46,15 +46,31 @@ En él se encuentran los localizadores y los métodos para simular las acciones 
 
 
 
-
-
-
-
 #### Archivo _phone_code.py_
 Contiene la función para recuperar el código de verificación del número de teléfono.
 
+![retrieve](https://github.com/user-attachments/assets/8ff09828-5d9e-4f49-a6ab-f72d7d4e76ab)
+
+
+
 #### Archivo _TestUrbanRoutes.py_ 
 Dentro de él se realizan las pruebas necesarias para evaluar la funcionalidad en particular.
+
+##### Clase setup
+![setupclass](https://github.com/user-attachments/assets/67d719ab-0b89-4013-b82c-64ff83a184dd)
+
+##### Pruebas
+![test1](https://github.com/user-attachments/assets/2f3ef82b-fb40-4d94-9299-f492a99fb84d)
+
+![test2](https://github.com/user-attachments/assets/0ef98457-29b9-4922-a869-7d1b73dba8b9)
+
+![test3](https://github.com/user-attachments/assets/f1d1e093-2396-4007-ad3f-e4b46b7ea1fa)
+
+
+##### Clase teardown
+![teardown](https://github.com/user-attachments/assets/2330a6e0-a490-49bc-bbd6-c436df7cd165)
+
+
 
 #### Instalación de Selenium
 ```sh
